@@ -1,28 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Women Safety Analytics</title>
+    <meta charset="UTF-8">
+    <title>SecureShe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial; text-align: center; padding-top: 50px; background-color: #f2f2f2; }
-        h1 { color: #333; }
-        button {
-            padding: 15px 30px;
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 40px;
+        }
+
+        .big-image img {
+            width: 800px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .wrapper {
+            position: relative; /* To position logo inside */
+            background: linear-gradient(135deg, #ffe6f0, #fddde6);
+            padding: 40px 40px 40px 100px; /* Left padding for logo space */
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Small logo position - middle left inside container */
+        .small-logo {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70px;
+            height: auto;
+        }
+
+        .content {
+            text-align: left;
+        }
+
+        .content h1 {
+            font-size: 36px;
+            color: #d63384;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p.description {
             font-size: 18px;
-            background-color: #007bff;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .feature-item {
+            background: #ffe6f0;
+            padding: 12px 18px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.1);
+        }
+
+        .features h3 {
+            color: #d63384;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .features p {
+            color: #555;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff69b4, #d63384);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            display: block;
+            margin: 0 auto;
         }
+
         button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(135deg, #d63384, #b2185b);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .big-image img {
+                width: 80%;
+            }
+
+            .small-logo {
+                position: static;
+                transform: none;
+                margin-bottom: 20px;
+            }
+
+            .wrapper {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Women Safety Analytics</h1>
-    <form action="/start_detection" method="post">
-        <button type="submit">Start Detection</button>
-    </form>
+
+    <div class="main-container">
+        <!-- Big Image on the Left -->
+        <div class="big-image">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Women Safety Visual">
+        </div>
+
+        <!-- Main Container with Small Logo Middle Left Inside -->
+        <div class="wrapper">
+            <!-- Small Logo - Middle Left -->
+            <img src="{{ url_for('static', filename='images/image.png') }}" alt="Women Safety Logo" class="small-logo">
+
+            <div class="content">
+                <h1>SecureShe</h1>
+
+                <p class="description">
+                    Empowering safety with AI-based detection—alerting trusted contacts with images and location when critical conditions are met.
+                </p>
+
+                <div class="features">
+                    <div class="feature-item">
+                        <h3>SOS Gesture Detection</h3>
+                        <p>Recognizes emergency hand gestures to send immediate alerts.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h3>Gender Classification</h3>
+                        <p>Analyzes surroundings to classify male and female presence.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h3>Weapon Detection</h3>
+                        <p>Detects visible weapons in the camera frame for rapid response.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h3>Alone Woman at Night Detection</h3>
+                        <p>Flags cases where a woman is alone during nighttime conditions.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h3>Surrounded by Men Alert</h3>
+                        <p>Sends alerts with image and location when one woman is surrounded by multiple men.</p>
+                    </div>
+                </div>
+
+                <form action="/start_detection" method="post">
+                    <button type="submit">Start Detection</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
+
